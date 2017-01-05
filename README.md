@@ -1,2 +1,2 @@
-# OneIDM
+# OneIM
 One Identity Manager
