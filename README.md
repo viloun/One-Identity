@@ -1,4 +1,2 @@
 # OneIM
-One Identity Manager
-Test 01
-Test 02
+Code repo for [https://www.oneidentity.com/products/identity-manager/](https://www.oneidentity.com/products/identity-manager/)
