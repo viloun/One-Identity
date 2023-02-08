@@ -1,0 +1,289 @@
+{
+	"info": {
+		"_postman_id": "633dd216-a26e-407f-8f41-b4cac3e32722",
+		"name": "Configuration API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6906385"
+	},
+	"item": [
+		{
+			"name": "ServiceNow",
+			"item": [
+				{
+					"name": "Get ServiceNow Ticketing UIDs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseData = pm.response.json();\r",
+									"console.log(responseData);\r",
+									"for(var i = 0; i < responseData.length; i++) \r",
+									"{\r",
+									"    \r",
+									"    if (responseData[i].display == \"SCN\")\r",
+									"    {\r",
+									"        pm.environment.set(\"SCN_UID\", responseData[i].values.UID_ConfigParm);\r",
+									"    }     \r",
+									"\r",
+									"    if (responseData[i].display == \"SCN\\\\InstanceURL\")\r",
+									"    {\r",
+									"        pm.environment.set(\"SCN_InstanceURL_UID\", responseData[i].values.UID_ConfigParm);\r",
+									"    }     \r",
+									"\r",
+									"    if (responseData[i].display == \"SCN\\\\InstanceUser\")\r",
+									"    {\r",
+									"        pm.environment.set(\"SCN_InstanceUser_UID\", responseData[i].values.UID_ConfigParm);\r",
+									"    }     \r",
+									"    if (responseData[i].display == \"SCN\\\\InstanceUserPassword\")\r",
+									"    {\r",
+									"        pm.environment.set(\"SCN_InstanceUserPassword_UID\", responseData[i].values.UID_ConfigParm);\r",
+									"    }     \r",
+									"\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"where\": \"Description like 'ServiceNow%'\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{oim_app_server}}/api/entities/DialogConfigParm",
+							"host": [
+								"{{oim_app_server}}"
+							],
+							"path": [
+								"api",
+								"entities",
+								"DialogConfigParm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set ServiceNow Ticketing: SCN",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"values\" :{\r\n        \"Value\": \"1\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{oim_app_server}}/api/entity/DialogConfigParm/{{SCN_UID}}",
+							"host": [
+								"{{oim_app_server}}"
+							],
+							"path": [
+								"api",
+								"entity",
+								"DialogConfigParm",
+								"{{SCN_UID}}"
+							]
+						},
+						"description": "This API will allow you to set any attribute on the Person object. Follow the below example for the Body in JSON format\n\n{\n\n\"values\":\n\n{\n\n\"COLUMN_NAME\": \"COLUMN_VALUE\"\n\n}\n\n}"
+					},
+					"response": []
+				},
+				{
+					"name": "Set ServiceNow Ticketing: SCN Instance URL",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"values\" :{\r\n        \"Value\": \"{{SCN_InstanceURL}}\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{oim_app_server}}/api/entity/DialogConfigParm/{{SCN_InstanceURL_UID}}",
+							"host": [
+								"{{oim_app_server}}"
+							],
+							"path": [
+								"api",
+								"entity",
+								"DialogConfigParm",
+								"{{SCN_InstanceURL_UID}}"
+							]
+						},
+						"description": "This API will allow you to set any attribute on the Person object. Follow the below example for the Body in JSON format\n\n{\n\n\"values\":\n\n{\n\n\"COLUMN_NAME\": \"COLUMN_VALUE\"\n\n}\n\n}"
+					},
+					"response": []
+				},
+				{
+					"name": "Set ServiceNow Ticketing: SCN User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"values\" :{\r\n        \"Value\": \"{{SCN_InstanceUser}}\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{oim_app_server}}/api/entity/DialogConfigParm/{{SCN_InstanceUser_UID}}",
+							"host": [
+								"{{oim_app_server}}"
+							],
+							"path": [
+								"api",
+								"entity",
+								"DialogConfigParm",
+								"{{SCN_InstanceUser_UID}}"
+							]
+						},
+						"description": "This API will allow you to set any attribute on the Person object. Follow the below example for the Body in JSON format\n\n{\n\n\"values\":\n\n{\n\n\"COLUMN_NAME\": \"COLUMN_VALUE\"\n\n}\n\n}"
+					},
+					"response": []
+				},
+				{
+					"name": "Set ServiceNow Ticketing: SCN User Password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"values\" :{\r\n        \"Value\": \"{{SCN_InstanceUserPassword}}\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{oim_app_server}}/api/entity/DialogConfigParm/{{SCN_InstanceUserPassword_UID}}",
+							"host": [
+								"{{oim_app_server}}"
+							],
+							"path": [
+								"api",
+								"entity",
+								"DialogConfigParm",
+								"{{SCN_InstanceUserPassword_UID}}"
+							]
+						},
+						"description": "This API will allow you to set any attribute on the Person object. Follow the below example for the Body in JSON format\n\n{\n\n\"values\":\n\n{\n\n\"COLUMN_NAME\": \"COLUMN_VALUE\"\n\n}\n\n}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "List All Configurations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{oim_app_server}}/api/entities/DialogConfigParm",
+					"host": [
+						"{{oim_app_server}}"
+					],
+					"path": [
+						"api",
+						"entities",
+						"DialogConfigParm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Configuration by UID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseData = pm.response.json();\r",
+							"console.log(responseData);\r",
+							"for(var i = 0; i < responseData.length; i++) \r",
+							"{\r",
+							"    \r",
+							"    if (responseData[i].display == \"SCN\")\r",
+							"    {\r",
+							"        pm.environment.set(\"SCN_UID\", responseData[i].values.UID_ConfigParm);\r",
+							"    }     \r",
+							"\r",
+							"    if (responseData[i].display == \"SCN\\\\InstanceURL\")\r",
+							"    {\r",
+							"        pm.environment.set(\"SCN_InstanceURL_UID\", responseData[i].values.UID_ConfigParm);\r",
+							"    }     \r",
+							"\r",
+							"    if (responseData[i].display == \"SCN\\\\InstanceUser\")\r",
+							"    {\r",
+							"        pm.environment.set(\"SCN_InstanceUser_UID\", responseData[i].values.UID_ConfigParm);\r",
+							"    }     \r",
+							"    if (responseData[i].display == \"SCN\\\\InstanceUserPassword\")\r",
+							"    {\r",
+							"        pm.environment.set(\"SCN_InstanceUserPassword_UID\", responseData[i].values.UID_ConfigParm);\r",
+							"    }     \r",
+							"\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{oim_app_server}}/api/entity/DialogConfigParm/{{SCN_InstanceUser_UID}}",
+					"host": [
+						"{{oim_app_server}}"
+					],
+					"path": [
+						"api",
+						"entity",
+						"DialogConfigParm",
+						"{{SCN_InstanceUser_UID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

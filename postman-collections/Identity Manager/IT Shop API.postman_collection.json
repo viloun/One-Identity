@@ -1,0 +1,370 @@
+{
+	"info": {
+		"_postman_id": "f57f75dc-bfe0-48cb-910c-4c638b4e6ff8",
+		"name": "IT Shop API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6906385"
+	},
+	"item": [
+		{
+			"name": "ServiceNow",
+			"item": [
+				{
+					"name": "Get Product by Name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseData = pm.response.json();\r",
+									"pm.environment.set(\"UID_ITShopOrg\", responseData[0].values['UID_ITShopOrg']);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"where\": \"Ident_Org = '{{Ident_Org}}'\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{oim_app_server}}/api/entities/ITShopOrg?loadType=ForeignDisplays",
+							"host": [
+								"{{oim_app_server}}"
+							],
+							"path": [
+								"api",
+								"entities",
+								"ITShopOrg"
+							],
+							"query": [
+								{
+									"key": "loadType",
+									"value": "ForeignDisplays"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All ServiceNow Service Categories",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseData = pm.response.json();\r",
+									"pm.environment.set(\"UID_AccProductGroup\", responseData[0].values['UID_AccProductGroup']);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"where\": \"IsServiceNowEnabled = 'true'\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{oim_app_server}}/api/entities/AccProductGroup?displayColumns=IsServiceNowEnabled;UID_OrgRuler;UID_PWODecisionMethod",
+							"host": [
+								"{{oim_app_server}}"
+							],
+							"path": [
+								"api",
+								"entities",
+								"AccProductGroup"
+							],
+							"query": [
+								{
+									"key": "displayColumns",
+									"value": "IsServiceNowEnabled;UID_OrgRuler;UID_PWODecisionMethod"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Service Items In ServiceNow Category by UID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseData = pm.response.json();\r",
+									"pm.environment.set(\"UID_AccProduct\", responseData[0].values['UID_AccProduct']);\r",
+									"pm.environment.set(\"Ident_Org\", responseData[0].values['Ident_AccProduct']);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"where\": \"UID_AccProductGroup = '{{UID_AccProductGroup}}'\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{oim_app_server}}/api/entities/AccProduct?displayColumns=UID_AccProductGroup;UID_OrgRuler;UID_PWODecisionMethod",
+							"host": [
+								"{{oim_app_server}}"
+							],
+							"path": [
+								"api",
+								"entities",
+								"AccProduct"
+							],
+							"query": [
+								{
+									"key": "displayColumns",
+									"value": "UID_AccProductGroup;UID_OrgRuler;UID_PWODecisionMethod"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request ServiceNow Item By UID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseData = pm.response.json();\r",
+									"pm.environment.set(\"UID_PersonWantsOrg\", responseData.uid);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"values\": {\r\n        \"UID_Org\": \"{{UID_ITShopOrg}}\",\r\n        \"OrderReason\": \"Created from Postman API\",\r\n        \"UID_PersonInserted\": \"{{UID_Person}}\",\r\n        \"UID_PersonOrdered\": \"{{UID_Person}}\"\r\n    }\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{oim_app_server}}/api/entity/PersonWantsOrg",
+							"host": [
+								"{{oim_app_server}}"
+							],
+							"path": [
+								"api",
+								"entity",
+								"PersonWantsOrg"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "List All Service Items",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseData = pm.response.json();\r",
+							"pm.environment.set(\"UID_AccProduct\", responseData[0].values['UID_AccProduct']);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{oim_app_server}}/api/entities/AccProduct?displayColumns=UID_AccProductGroup;UID_OrgRuler;UID_PWODecisionMethod",
+					"host": [
+						"{{oim_app_server}}"
+					],
+					"path": [
+						"api",
+						"entities",
+						"AccProduct"
+					],
+					"query": [
+						{
+							"key": "displayColumns",
+							"value": "UID_AccProductGroup;UID_OrgRuler;UID_PWODecisionMethod"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List All Service Categories",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseData = pm.response.json();\r",
+							"pm.environment.set(\"UID_AccProduct\", responseData[0].values['UID_AccProduct']);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{oim_app_server}}/api/entities/AccProductGroup?displayColumns=IsServiceNowEnabled;UID_OrgRuler;UID_PWODecisionMethod",
+					"host": [
+						"{{oim_app_server}}"
+					],
+					"path": [
+						"api",
+						"entities",
+						"AccProductGroup"
+					],
+					"query": [
+						{
+							"key": "displayColumns",
+							"value": "IsServiceNowEnabled;UID_OrgRuler;UID_PWODecisionMethod"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Service Item By UID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{oim_app_server}}/api/entity/AccProduct/{{UID_AccProduct}}",
+					"host": [
+						"{{oim_app_server}}"
+					],
+					"path": [
+						"api",
+						"entity",
+						"AccProduct",
+						"{{UID_AccProduct}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Service Item By Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseData = pm.response.json();\r",
+							"pm.environment.set(\"UID_AccProduct\", responseData[0].values['UID_AccProduct']);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"where\": \"Ident_AccProduct = '{{ServiceItem_Name}}'\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{oim_app_server}}/api/entities/AccProduct?displayColumns=UID_AccProductGroup",
+					"host": [
+						"{{oim_app_server}}"
+					],
+					"path": [
+						"api",
+						"entities",
+						"AccProduct"
+					],
+					"query": [
+						{
+							"key": "displayColumns",
+							"value": "UID_AccProductGroup"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

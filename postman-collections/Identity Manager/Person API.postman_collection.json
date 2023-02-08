@@ -1,0 +1,238 @@
+{
+	"info": {
+		"_postman_id": "33b1c095-5e5b-4a0d-8d96-02eb0c721b0d",
+		"name": "Person API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6906385"
+	},
+	"item": [
+		{
+			"name": "List All Person",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{oim_app_server}}/api/entities/Person?loadType=Default",
+					"host": [
+						"{{oim_app_server}}"
+					],
+					"path": [
+						"api",
+						"entities",
+						"Person"
+					],
+					"query": [
+						{
+							"key": "loadType",
+							"value": "Default"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Person By Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseData = pm.response.json();\r",
+							"pm.environment.set(\"UID_Department\", responseData.values['UID_Department']);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{oim_app_server}}/api/entity/Person/{{UID_Person}}",
+					"host": [
+						"{{oim_app_server}}"
+					],
+					"path": [
+						"api",
+						"entity",
+						"Person",
+						"{{UID_Person}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Person By CentralAccount",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseData = pm.response.json();\r",
+							"pm.environment.set(\"UID_Person\", responseData[0].values['UID_Person']);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"where\": \"CentralAccount = '{{CentralAccount}}'\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{oim_app_server}}/api/entities/Person",
+					"host": [
+						"{{oim_app_server}}"
+					],
+					"path": [
+						"api",
+						"entities",
+						"Person"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Person By DefaultEmailAddress",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"where\": \"DefaultEmailAddress = '{{DefaultEmailAddress}}'\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{oim_app_server}}/api/entities/Person",
+					"host": [
+						"{{oim_app_server}}"
+					],
+					"path": [
+						"api",
+						"entities",
+						"Person"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Persons In Departments",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"where\": \"UID_Department = '{{UID_Department}}'\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{oim_app_server}}/api/entities/Person",
+					"host": [
+						"{{oim_app_server}}"
+					],
+					"path": [
+						"api",
+						"entities",
+						"Person"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set Person attribute",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"values\" :{\r\n        \"Description\": \"My Description\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{oim_app_server}}/api/entity/Person/{{UID_Person}}",
+					"host": [
+						"{{oim_app_server}}"
+					],
+					"path": [
+						"api",
+						"entity",
+						"Person",
+						"{{UID_Person}}"
+					]
+				},
+				"description": "This API will allow you to set any attribute on the Person object. Follow the below example for the Body in JSON format\n\n{\n\n\"values\":\n\n{\n\n\"COLUMN_NAME\": \"COLUMN_VALUE\"\n\n}\n\n}"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "UID_Person",
+			"value": ""
+		}
+	]
+}

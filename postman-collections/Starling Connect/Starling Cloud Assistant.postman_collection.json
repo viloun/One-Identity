@@ -1,0 +1,141 @@
+{
+	"info": {
+		"_postman_id": "da732259-2d9e-46f0-9379-867158676830",
+		"name": "Starling Cloud Assistant",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6906385"
+	},
+	"item": [
+		{
+			"name": "v1",
+			"item": [
+				{
+					"name": "senders",
+					"item": [
+						{
+							"name": "Get Senders",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CloudAssistantApiEndpoint}}/v1/subscriptions/f7a5aab7-4faf-43cb-a49e-b7b35e6651b2/senders",
+									"host": [
+										"{{CloudAssistantApiEndpoint}}"
+									],
+									"path": [
+										"v1",
+										"subscriptions",
+										"f7a5aab7-4faf-43cb-a49e-b7b35e6651b2",
+										"senders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Sender",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"displayName\": null\r\n}"
+								},
+								"url": {
+									"raw": "{{CloudAssistantApiEndpoint}}/v1/subscriptions/f7a5aab7-4faf-43cb-a49e-b7b35e6651b2/senders",
+									"host": [
+										"{{CloudAssistantApiEndpoint}}"
+									],
+									"path": [
+										"v1",
+										"subscriptions",
+										"f7a5aab7-4faf-43cb-a49e-b7b35e6651b2",
+										"senders"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Get Auth Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseData = pm.response.json();\r",
+							"pm.environment.set(\"access_token\", responseData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Oauth",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "{{OneIMClientId}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{OneIMClientSecret}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{TokenURL}}",
+					"host": [
+						"{{TokenURL}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

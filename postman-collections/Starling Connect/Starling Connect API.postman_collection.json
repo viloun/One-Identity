@@ -1,0 +1,2124 @@
+{
+	"info": {
+		"_postman_id": "c96d8287-7c76-463c-8def-5babdec9da11",
+		"name": "Starling Connect API",
+		"description": "This Postman collection will used to communicate to Starling Connect platform.\n\nYou will need to change the environment setting to match your instance and also the Connector you wish to connect to.\n\nStarling Connect adheres to the SCIM v2.0 specifications.\n\nA folder is created for each unique target system that extends the SCIM model and schema. If a target system does not extend the schema, then you can use the API calls in the SCIM 2.0 -> Operations folders to retrieve/update objects",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6906385"
+	},
+	"item": [
+		{
+			"name": "SCIM 2.0",
+			"item": [
+				{
+					"name": "Discovery",
+					"item": [
+						{
+							"name": "Fetch Resource Types",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/ResourceTypes",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"ResourceTypes"
+									]
+								},
+								"description": "StartFragment\n\nAn endpoint used to discover the types of resources available.\n\nEndFragment"
+							},
+							"response": []
+						},
+						{
+							"name": "Fetch Service Provider",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/ServiceProviderConfig",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"ServiceProviderConfig"
+									]
+								},
+								"description": "StartFragment\n\nSpecification compliance, authentication schemes, data models.\n\nEndFragment"
+							},
+							"response": []
+						},
+						{
+							"name": "Fetch Schemas",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/Schemas",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"Schemas"
+									]
+								},
+								"description": "StartFragment\n\nIntrospect resources and attribute extensions.\n\nEndFragment"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Operations",
+					"item": [
+						{
+							"name": "Get Users",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var responseData = pm.response.json();\r",
+											"pm.environment.set(\"UserID\", responseData.resources[0].id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/Users",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"Users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get User By ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/Users/{{UserID}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"Users",
+										"{{UserID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Groups",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/Groups",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"Groups"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Roles",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var responseData = pm.response.json();\r",
+											"pm.environment.set(\"RoleID\", responseData.resources[0].id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/Roles",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"Roles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Role By ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/Roles/{{RoleID}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"Roles",
+										"{{RoleID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Role",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"TestRole\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/Roles",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"Roles"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Administrative",
+			"item": [
+				{
+					"name": "Connectors",
+					"item": [
+						{
+							"name": "Get Connectors",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/v1/Connectors",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"v1",
+										"Connectors"
+									]
+								},
+								"description": "StartFragment\n\nAn endpoint used to discover the types of resources available.\n\nEndFragment"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "RegisteredConnectors",
+					"item": [
+						{
+							"name": "Get RegisteredConnectors",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var responseData = pm.response.json();\r",
+											"pm.environment.set(\"registeredConnectorId\", responseData[0].registeredConnectorId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/v1/subscriptions/{{starlingSubscriptionId}}/registeredConnectors",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"v1",
+										"subscriptions",
+										"{{starlingSubscriptionId}}",
+										"registeredConnectors"
+									]
+								},
+								"description": "StartFragment\n\nAn endpoint used to discover the types of resources available.\n\nEndFragment"
+							},
+							"response": []
+						},
+						{
+							"name": "Get RegisteredConnector By Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/v1/subscriptions/{{starlingSubscriptionId}}/registeredConnectors/{{registeredConnectorId}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"v1",
+										"subscriptions",
+										"{{starlingSubscriptionId}}",
+										"registeredConnectors",
+										"{{registeredConnectorId}}"
+									]
+								},
+								"description": "StartFragment\n\nAn endpoint used to discover the types of resources available.\n\nEndFragment"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Subscriptions",
+					"item": [
+						{
+							"name": "Get Subscriptions by Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/v1/subscriptions/{{starlingSubscriptionId}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"v1",
+										"subscriptions",
+										"{{starlingSubscriptionId}}"
+									]
+								},
+								"description": "StartFragment\n\nAn endpoint used to discover the types of resources available.\n\nEndFragment"
+							},
+							"response": []
+						},
+						{
+							"name": "Get Subscriptions",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/v1/subscriptions",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"v1",
+										"subscriptions"
+									]
+								},
+								"description": "StartFragment\n\nAn endpoint used to discover the types of resources available.\n\nEndFragment"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "SCIM",
+					"item": [
+						{
+							"name": "Get ServiceProviderConfig by Registered Connector Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/v1/subscriptions/{{starlingSubscriptionId}}/registeredConnectors/{{registeredConnectorId}}/protocols/scim/serviceproviderconfig",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"v1",
+										"subscriptions",
+										"{{starlingSubscriptionId}}",
+										"registeredConnectors",
+										"{{registeredConnectorId}}",
+										"protocols",
+										"scim",
+										"serviceproviderconfig"
+									]
+								},
+								"description": "StartFragment\n\nAn endpoint used to discover the types of resources available.\n\nEndFragment"
+							},
+							"response": []
+						},
+						{
+							"name": "Get SCIM by Registered Connector Id SCIM endpoint",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/v1/subscriptions/{{starlingSubscriptionId}}/registeredConnectors/{{registeredConnectorId}}/protocols/scim/{{scimEndpoint}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"v1",
+										"subscriptions",
+										"{{starlingSubscriptionId}}",
+										"registeredConnectors",
+										"{{registeredConnectorId}}",
+										"protocols",
+										"scim",
+										"{{scimEndpoint}}"
+									]
+								},
+								"description": "StartFragment\n\nAn endpoint used to discover the types of resources available.\n\nEndFragment"
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"description": "Methods from the Swagger APIs\n\n[https://connect-supervisor.cloud.oneidentity.com/swagger/index.html](https://connect-supervisor.cloud.oneidentity.com/swagger/index.html)"
+		},
+		{
+			"name": "Connectors",
+			"item": [
+				{
+					"name": "OneLogin",
+					"item": [
+						{
+							"name": "Get Applications",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var responseData = pm.response.json();\r",
+											"pm.environment.set(\"ApplicationID\", responseData.resources[0].id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/Applications",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"Applications"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Application by ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/Applications/{{ApplicationID}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"Applications",
+										"{{ApplicationID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "SuccessFactorsHR",
+					"item": [
+						{
+							"name": "Get Employees",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/Employees",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"Employees"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Employee by ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/Employees/900119",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"Employees",
+										"900119"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get JobCode",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/JobCodes",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"JobCodes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Departments",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/Departments",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"Departments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Locations",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/Locations",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"Locations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Divisions",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/Divisions",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"Divisions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get CostCenters",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/CostCenters",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"CostCenters"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Companies",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/Companies",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"Companies"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Positions",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/Positions",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"Positions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get EmpEmployments",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/EmpEmployments",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"EmpEmployments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get PerPersonals",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/PerPersonals",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"PerPersonals"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get PerPhones",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/PerPhones",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"PerPhones"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get EventReasons",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/EventReasons",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"EventReasons"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get PicklistOptions",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/PicklistOptions",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"PicklistOptions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get PicklistLabels",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/PicklistLabels",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"PicklistLabels"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get ServiceProviderAuthority",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/ServiceProviderAuthority",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"ServiceProviderAuthority"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get PerEmails",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/PerEmails",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"PerEmails"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CIEM - Azure",
+					"item": [
+						{
+							"name": "Get ManagementGroups",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/ManagementGroups",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"ManagementGroups"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Subscriptions",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/Subscriptions",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"Subscriptions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get ResourceGroups",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/ResourceGroups",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"ResourceGroups"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get AzResources",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/AzResources",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"AzResources"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get AzResourceTypes",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/AzResourceTypes",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"AzResourceTypes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Locations",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/Locations",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"Locations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Roles",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/Roles",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"Roles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get RoleAssignments",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/RoleAssignments",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"RoleAssignments"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Workday",
+					"item": [
+						{
+							"name": "Get Employees",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/Employees",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"Employees"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Locations",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/Locations",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"Locations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Positions",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/Positions",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"Positions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get JobClassifications",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/JobClassifications",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"JobClassifications"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get FutureDatedEmployees",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/FutureDatedEmployees",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"FutureDatedEmployees"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get DeltaSyncEmployees",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/DeltaSyncEmployees",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"DeltaSyncEmployees"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get CustomOrgs",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/CustomOrgs",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"CustomOrgs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get ServiceProviderAuthority",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/ServiceProviderAuthority",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"ServiceProviderAuthority"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Salesforce",
+					"item": [
+						{
+							"name": "Get Profiles",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var responseData = pm.response.json();\r",
+											"pm.environment.set(\"RoleID\", responseData.resources[0].id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/{{URI}}/Profiles",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"{{URI}}",
+										"Profiles"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Login API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseData = pm.response.json();\r",
+							"pm.environment.set(\"access_token\", responseData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Oauth",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "{{clientID}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{clientSecret}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{TokenURL}}",
+					"host": [
+						"{{TokenURL}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

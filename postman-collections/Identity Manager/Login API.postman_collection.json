@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "14c03a06-b247-42bd-ab1f-3a394d334dd2",
+		"name": "Login API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6906385"
+	},
+	"item": [
+		{
+			"name": "Dialog User Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"AuthString\": \"Module=DialogUser;User={{oim_api_dialog_username}};Password={{oim_api_dialog_password}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{oim_app_server}}/auth/apphost",
+					"host": [
+						"{{oim_app_server}}"
+					],
+					"path": [
+						"auth",
+						"apphost"
+					]
+				},
+				"description": "This API will login to Identity Manager using the system user, i.e. DiaglogUser account"
+			},
+			"response": []
+		},
+		{
+			"name": "Dialog User Login imx",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"AuthString\": \"Module=DialogUser;User={{oim_api_dialog_username}};Password={{oim_api_dialog_password}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{oim_app_server}}/imx/login/portal/RoleBasedPerson",
+					"host": [
+						"{{oim_app_server}}"
+					],
+					"path": [
+						"imx",
+						"login",
+						"portal",
+						"RoleBasedPerson"
+					]
+				},
+				"description": "This API will login to Identity Manager using the system user, i.e. DiaglogUser account"
+			},
+			"response": []
+		},
+		{
+			"name": "Employeer Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"AuthString\": \"Module=RoleBasedPerson;User={{oim_api_person_username}};Password={{oim_api_person_password}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{oim_app_server}}/auth/apphost",
+					"host": [
+						"{{oim_app_server}}"
+					],
+					"path": [
+						"auth",
+						"apphost"
+					]
+				},
+				"description": "This API will login to Identity Manager using the system user, i.e. DiaglogUser account"
+			},
+			"response": []
+		}
+	]
+}
